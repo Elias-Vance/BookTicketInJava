@@ -3,6 +3,8 @@ package com.wsh.listener;
 import com.wsh.pojo.CommonTrainTicket;
 import com.wsh.pojo.HighSpeedTicket;
 import com.wsh.pojo.Ticket;
+import com.wsh.pojo.User;
+import com.wsh.ui.BookTicketUI;
 import com.wsh.ui.SearchTrainsUI;
 import com.wsh.ui.ShowStationUI;
 import com.wsh.ui.ShowTicketsUI;
@@ -16,7 +18,6 @@ import java.util.StringTokenizer;
 
 public class UIListener implements ActionListener {
     private BufferedReader reader;
-    private BufferedWriter writer;
     private ArrayList<HighSpeedTicket> highSpeedTickets=new ArrayList<>();
     private ArrayList<CommonTrainTicket> commonTrainTickets=new ArrayList<>();
 
@@ -56,33 +57,23 @@ public class UIListener implements ActionListener {
             }
         }
         reader.close();
-
-        writer=new BufferedWriter(new FileWriter("D:\\javacode\\BookTicket\\src\\main\\resources\\TicketInfo\\tickets", true));
     }
 
 
     @Override
     public void actionPerformed(ActionEvent e) {
         String s=e.getActionCommand();
-        switch (s) {
-            case "查询余票":
-                new ShowTicketsUI(highSpeedTickets, commonTrainTickets);
-                break;
-            case "查询车次":
-                new SearchTrainsUI(highSpeedTickets, commonTrainTickets);
-                break;
-            case "查询站点":
-                new ShowStationUI(highSpeedTickets, commonTrainTickets);
-                break;
-            case "订票":
-                break;
-            case "退票":
-                break;
-            case "车票改签":
-                break;
-            default:
-                break;
+        if (s.equals("查询余票")){
+            new ShowTicketsUI(this.highSpeedTickets, commonTrainTickets);
+            System.out.println(this.highSpeedTickets.hashCode());
+        } else if (s.equals("查询车次")) {
+            new SearchTrainsUI(this.highSpeedTickets, commonTrainTickets);
+        } else if (s.equals("查询站点")) {
+            new ShowStationUI(this.highSpeedTickets, commonTrainTickets);
+        } else if (s.equals("订票")) {
+            new BookTicketUI(this.highSpeedTickets, commonTrainTickets);
         }
+
     }
 
 }

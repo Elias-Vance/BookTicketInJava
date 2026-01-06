@@ -51,7 +51,6 @@ public class ShowTicketsUI {
                 data[i][6] = ticket.getMap().get("一等座");
                 data[i][7] = ticket.getMap().get("二等座");
             }else{
-                System.out.println(1);
                 CommonTrainTicket ticket = commonTrainTickets.get(i/2);
                 data[i][0] = ticket.getTrainName();
                 data[i][1] = ticket.getStartStation();
@@ -93,7 +92,9 @@ public class ShowTicketsUI {
         bookButton.setBackground(new Color(211, 47, 47));
         bookButton.setForeground(Color.WHITE);
         bookButton.setFocusPainted(false);
-        //bookButton.addActionListener(new BookActionListener(table));
+        bookButton.addActionListener(e -> {
+            new BookTicketUI(highSpeedTickets, commonTrainTickets);
+        });
 
         buttonPanel.add(backButton);
         buttonPanel.add(bookButton);

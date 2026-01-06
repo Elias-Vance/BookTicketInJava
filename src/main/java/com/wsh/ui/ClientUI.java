@@ -39,6 +39,7 @@ public class ClientUI {
                 "车票改签"
         };
 
+        UIListener listener = new UIListener();
         for (String text : buttons) {
             JButton btn = new JButton(text);
             btn.setFont(new Font("Microsoft YaHei", Font.PLAIN, 16));
@@ -48,7 +49,7 @@ public class ClientUI {
                     BorderFactory.createLineBorder(new Color(220, 220, 220)),
                     BorderFactory.createEmptyBorder(10, 10, 10, 10)
             ));
-            btn.addActionListener(new UIListener());
+            btn.addActionListener(listener);
             buttonPanel.add(btn);
         }
 

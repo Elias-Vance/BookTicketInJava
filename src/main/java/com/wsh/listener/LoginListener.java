@@ -1,5 +1,6 @@
 package com.wsh.listener;
 
+import com.wsh.pojo.User;
 import com.wsh.ui.ClientUI;
 
 import javax.net.ssl.KeyManager;
@@ -18,6 +19,7 @@ public class LoginListener implements ActionListener {
     private BufferedReader reader;
     private BufferedWriter writer;
     private JFrame jframe;
+    public static User  user;
 
     public LoginListener(JTextField userName, JTextField password, JFrame jframe) {
         this.userName=userName;
@@ -58,6 +60,9 @@ public class LoginListener implements ActionListener {
                 System.out.println("点击了登录");
                 if (userInfo.containsKey(userName)){
                     if (userInfo.get(userName).equals(password)){
+                        user=new User();
+                        user.setUserName(userName);
+                        user.setPassword(password);
                         System.out.println("登录成功");
                         jframe.setVisible(false);
                         try {

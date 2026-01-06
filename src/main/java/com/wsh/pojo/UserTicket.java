@@ -3,23 +3,16 @@ package com.wsh.pojo;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
 
 @Data
-public class Ticket {
+public class UserTicket {
+    private String userName;
     private int id;
     private String trainName;
-    private String trainType;
     private String startStation;
     private String endStation;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
+    private String seatType;
     private double price;
-    private boolean status;
-    private HashMap<String,Integer> map=new HashMap<>();
-
-    public HashMap<String,Integer> getMap() {
-    	return map;
-    }
-
 }
