@@ -4,6 +4,7 @@ import com.wsh.pojo.CommonTrainTicket;
 import com.wsh.pojo.HighSpeedTicket;
 import com.wsh.pojo.Ticket;
 import com.wsh.ui.SearchTrainsUI;
+import com.wsh.ui.ShowStationUI;
 import com.wsh.ui.ShowTicketsUI;
 
 import java.awt.event.ActionEvent;
@@ -71,6 +72,7 @@ public class UIListener implements ActionListener {
                 new SearchTrainsUI(highSpeedTickets, commonTrainTickets);
                 break;
             case "查询站点":
+                new ShowStationUI(highSpeedTickets, commonTrainTickets);
                 break;
             case "订票":
                 break;
