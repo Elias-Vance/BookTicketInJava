@@ -6,17 +6,17 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class ClientUI {
-    public ClientUI(){
+    public ClientUI() throws IOException {
         init();
     }
 
-    public void init(){
+    public void init() throws IOException {
         JFrame jf = new JFrame("订票窗口");
         jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jf.setBounds(100,100,500,500);
-        jf.setVisible(true);
         jf.setLocationRelativeTo( null);
         // 顶部标题
         JLabel header = new JLabel(" 火车票订票系统", JLabel.CENTER);
@@ -61,6 +61,7 @@ public class ClientUI {
         jf.add(header, BorderLayout.NORTH);
         jf.add(buttonPanel, BorderLayout.CENTER);
         jf.add(status, BorderLayout.SOUTH);
+        jf.setVisible(true);
     }
 
 

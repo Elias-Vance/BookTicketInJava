@@ -25,7 +25,6 @@ public class LoginListener implements ActionListener {
         this.jframe=jframe;
         try {
             reader=new BufferedReader(new FileReader("D:\\javacode\\BookTicket\\src\\main\\resources\\UserInfo\\users"));
-            writer=new BufferedWriter(new FileWriter("D:\\javacode\\BookTicket\\src\\main\\resources\\UserInfo\\users", true));
             String line;
             while ((line=reader.readLine())!=null){
                 String[] info=line.split("[=]");
@@ -38,8 +37,6 @@ public class LoginListener implements ActionListener {
         }finally {
             try {
                 reader.close();
-                writer.flush();
-                writer.close();
                 System.out.println("用户信息文件关闭成功");
                 Set<String> keys=userInfo.keySet();
                 for (String key:keys){
@@ -63,7 +60,11 @@ public class LoginListener implements ActionListener {
                     if (userInfo.get(userName).equals(password)){
                         System.out.println("登录成功");
                         jframe.setVisible(false);
-                        new ClientUI();
+                        try {
+                            new ClientUI();
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
                     }else{
                         System.out.println("密码错误");
                         JOptionPane.showMessageDialog(null, "密码错误！", "错误", JOptionPane.ERROR_MESSAGE);

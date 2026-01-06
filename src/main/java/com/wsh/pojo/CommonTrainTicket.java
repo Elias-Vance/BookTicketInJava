@@ -5,8 +5,7 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 
-@Data
-public class Ticket {
+public class CommonTrainTicket extends  Ticket {
     private int id;
     private String trainName;
     private String trainType;
