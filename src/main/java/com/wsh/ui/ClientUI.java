@@ -36,7 +36,7 @@ public class ClientUI {
                 "查询站点",
                 "订票",
                 "退票",
-                "车票改签"
+                "查看车票"
         };
 
         UIListener listener = new UIListener();

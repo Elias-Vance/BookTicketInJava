@@ -4,10 +4,7 @@ import com.wsh.pojo.CommonTrainTicket;
 import com.wsh.pojo.HighSpeedTicket;
 import com.wsh.pojo.Ticket;
 import com.wsh.pojo.User;
-import com.wsh.ui.BookTicketUI;
-import com.wsh.ui.SearchTrainsUI;
-import com.wsh.ui.ShowStationUI;
-import com.wsh.ui.ShowTicketsUI;
+import com.wsh.ui.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,11 +15,12 @@ import java.util.StringTokenizer;
 
 public class UIListener implements ActionListener {
     private BufferedReader reader;
-    private ArrayList<HighSpeedTicket> highSpeedTickets=new ArrayList<>();
-    private ArrayList<CommonTrainTicket> commonTrainTickets=new ArrayList<>();
+    public static ArrayList<HighSpeedTicket> highSpeedTickets=new ArrayList<>();
+    public static ArrayList<CommonTrainTicket> commonTrainTickets=new ArrayList<>();
 
     public UIListener() throws IOException {
-        reader=new BufferedReader(new FileReader("D:\\javacode\\BookTicket\\src\\main\\resources\\TicketInfo\\tickets"));
+        InputStream inputStream = UIListener.class.getResourceAsStream("/TicketInfo/tickets");
+        reader=new BufferedReader(new InputStreamReader(inputStream));
         String line;
         while ((line=reader.readLine())!=null){
             StringTokenizer tokenizer=new StringTokenizer(line);
@@ -72,6 +70,10 @@ public class UIListener implements ActionListener {
             new ShowStationUI(this.highSpeedTickets, commonTrainTickets);
         } else if (s.equals("订票")) {
             new BookTicketUI(this.highSpeedTickets, commonTrainTickets);
+        }else if (s.equals("查看车票")) {
+            new ShowUserTicketUI(LoginListener.user);
+        } else if (s.equals("退票")) {
+            new RefundTicketUI(LoginListener.user);
         }
 
     }

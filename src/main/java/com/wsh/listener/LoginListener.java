@@ -1,6 +1,7 @@
 package com.wsh.listener;
 
 import com.wsh.pojo.User;
+import com.wsh.pojo.UserTicket;
 import com.wsh.ui.ClientUI;
 
 import javax.net.ssl.KeyManager;
@@ -9,6 +10,7 @@ import javax.swing.text.Keymap;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -26,7 +28,8 @@ public class LoginListener implements ActionListener {
         this.password=password;
         this.jframe=jframe;
         try {
-            reader=new BufferedReader(new FileReader("D:\\javacode\\BookTicket\\src\\main\\resources\\UserInfo\\users"));
+            InputStream inputStream = LoginListener.class.getResourceAsStream("/UserInfo/users");
+            reader=new BufferedReader(new InputStreamReader(inputStream));
             String line;
             while ((line=reader.readLine())!=null){
                 String[] info=line.split("[=]");
@@ -63,6 +66,7 @@ public class LoginListener implements ActionListener {
                         user=new User();
                         user.setUserName(userName);
                         user.setPassword(password);
+                        updateUserTickets();
                         System.out.println("登录成功");
                         jframe.setVisible(false);
                         try {
@@ -105,6 +109,34 @@ public class LoginListener implements ActionListener {
                     }
                 }
                 break;
+        }
+    }
+
+    public static void updateUserTickets() {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/UserInfo/users"));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] info = line.split(" ");
+                if(user.getUserName().equals( info[0])){
+                    UserTicket userTicket=new UserTicket();
+                    userTicket.setUserName(info[0]);
+                    userTicket.setTrainName(info[2]);
+                    userTicket.setStartStation(info[3]);
+                    userTicket.setEndStation(info[4]);
+                    userTicket.setStartTime(LocalDateTime.parse(info[5]));
+                    userTicket.setEndTime(LocalDateTime.parse(info[6]));
+                    userTicket.setSeatType(info[7]);
+                    userTicket.setPrice(Double.parseDouble(info[8]));
+                    userTicket.setId(Integer.parseInt(info[9]));
+                    user.getUserTickets().add(userTicket);
+                }
+            }
+            reader.close();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }

@@ -8,10 +8,9 @@ import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.attribute.UserPrincipal;
@@ -20,7 +19,7 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 public class BookTicketUI implements ActionListener {
-    private JFrame mainFrame;
+    public JFrame mainFrame;
     private  ArrayList<HighSpeedTicket> highSpeedTickets;
     private  ArrayList<CommonTrainTicket> commonTrainTickets;
     private HighSpeedTicket highSpeedTicket;      // 当前选中的高铁票
@@ -37,7 +36,7 @@ public class BookTicketUI implements ActionListener {
 
     private void initUI() {
         mainFrame = new JFrame("订票系统");
-        mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        mainFrame.setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
         mainFrame.setLayout(new BorderLayout(10, 10));
         mainFrame.setSize(800, 600);
         mainFrame.setLocationRelativeTo(null);
@@ -315,14 +314,15 @@ public class BookTicketUI implements ActionListener {
                 userTicket.setEndStation(selectedTicket.getEndStation());
                 userTicket.setStartTime(selectedTicket.getStartTime());
                 userTicket.setSeatType(seat);
+                userTicket.setPrice(selectedTicket.getPrice());
                 userTicket.setEndTime(selectedTicket.getEndTime());
-                user.setUserTicket(userTicket);
+                user.getUserTickets().add(userTicket);
                 try {
                     BufferedWriter writer = new BufferedWriter(new FileWriter("D:\\javacode\\BookTicket\\src\\main\\resources\\UserInfo\\userTickets", true));
                     writer.write(user.getUserName() + " " + user.getName() +  " "
-                            + user.getUserTicket().getTrainName() + " " + user.getUserTicket().getStartStation()
-                            + " " + user.getUserTicket().getEndStation() + " " + user.getUserTicket().getStartTime() + " "
-                            + user.getUserTicket().getEndTime()+ " " + user.getUserTicket().getSeatType());
+                            + selectedTicket.getTrainName() + " " + selectedTicket.getStartStation()
+                            + " " + selectedTicket.getEndStation() + " " + selectedTicket.getStartTime() + " "
+                            + selectedTicket.getEndTime()+ " " + seat+ " " + selectedTicket.getPrice()+" "+selectedTicket.getId());
                     writer.newLine();
                     writer.flush();
                     writer.close();
@@ -355,7 +355,7 @@ public class BookTicketUI implements ActionListener {
     }
 
     public void updateTickets() throws IOException {
-        String filePath = "D:\\javacode\\BookTicket\\src\\main\\resources\\TicketInfo\\tickets";
+        String filePath = "src/main/resources/TicketInfo/tickets";
         // 读取所有行
         List<String> lines = Files.readAllLines(Paths.get(filePath));
         for (int i = 0; i < lines.size(); i++) {

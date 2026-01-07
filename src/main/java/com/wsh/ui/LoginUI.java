@@ -18,7 +18,7 @@ public class LoginUI {
         JPanel mainPanel = new JPanel(new GridBagLayout());
         mainPanel.setBorder(BorderFactory.createEmptyBorder(30, 10, 30, 10));
         // 使用背景面板
-        BackgroundPanel backgroundPanel = new BackgroundPanel("D:\\javacode\\BookTicket\\src\\main\\resources\\Picture\\login2.jpg");
+        BackgroundPanel backgroundPanel = new BackgroundPanel("src/main/resources/Picture/login2.jpg");
         backgroundPanel.setLayout(new BorderLayout());
         mainPanel.setOpaque(false); // 设置为透明
         backgroundPanel.add(mainPanel, BorderLayout.CENTER);
