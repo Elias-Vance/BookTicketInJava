@@ -1,4 +1,3 @@
-[Uploading ReadMe.md…]()
 # BookingTrainTicket（In Pure Java）
 
 This is a train ticket booking system written entirely in Java, complete with built-in mock data files. It's ideal for beginners who are just starting to learn Java. The project primarily utilizes Java's UI components and object-oriented programming syntax.
