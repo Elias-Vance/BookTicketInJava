@@ -113,7 +113,12 @@ public class BookTicketUI implements ActionListener {
         mainFrame.getContentPane().removeAll();
         // 车次信息面板
         JPanel infoPanel = createInfoPanel(ticket);
-        mainFrame.add(infoPanel, BorderLayout.CENTER);
+        // 使用背景面板
+        BackgroundPanel backgroundPanel = new BackgroundPanel("src/main/resources/Picture/Book3.jpg");
+        backgroundPanel.setLayout(new BorderLayout());
+        infoPanel.setOpaque(false); // 设置为透明
+        backgroundPanel.add(infoPanel, BorderLayout.CENTER);
+        mainFrame.add(backgroundPanel, BorderLayout.CENTER);
         // 座位选择面板
         JPanel seatPanel = createSeatPanel();
         mainFrame.add(seatPanel, BorderLayout.WEST);
@@ -131,7 +136,12 @@ public class BookTicketUI implements ActionListener {
         mainFrame.getContentPane().removeAll();
         // 车次信息面板
         JPanel infoPanel = createInfoPanel(ticket);
-        mainFrame.add(infoPanel, BorderLayout.CENTER);
+        // 使用背景面板
+        BackgroundPanel backgroundPanel = new BackgroundPanel("src/main/resources/Picture/Book3.jpg");
+        backgroundPanel.setLayout(new BorderLayout());
+        infoPanel.setOpaque(false); // 设置为透明
+        backgroundPanel.add(infoPanel, BorderLayout.CENTER);
+        mainFrame.add(backgroundPanel, BorderLayout.CENTER);
         // 座位选择面板
         JPanel seatPanel = createSeatPanel();
         mainFrame.add(seatPanel, BorderLayout.WEST);
@@ -151,7 +161,9 @@ public class BookTicketUI implements ActionListener {
                 BorderFactory.createEtchedBorder(),
                 "车次信息",
                 TitledBorder.LEFT,
-                TitledBorder.TOP
+                TitledBorder.TOP,
+                new Font("微软雅黑", Font.BOLD, 16),
+                Color.WHITE
         ));
 
         GridBagConstraints gbc = new GridBagConstraints();
@@ -159,12 +171,14 @@ public class BookTicketUI implements ActionListener {
 
         JLabel routeLabel = new JLabel(ticket.getTrainName() +
                 " - " + ticket.getStartStation() + " → " + ticket.getEndStation());
-        routeLabel.setFont(new Font("微软雅黑", Font.BOLD, 16));
+        routeLabel.setFont(new Font("微软雅黑", Font.BOLD, 25));
+        routeLabel.setForeground(Color.LIGHT_GRAY);
         gbc.gridx = 0; gbc.gridy = 0;
         panel.add(routeLabel, gbc);
 
         JLabel timeLabel = new JLabel("出发时间: " + ticket.getStartTime() +
                 " | 到达时间: " + ticket.getEndTime());
+        timeLabel.setForeground(Color.WHITE);
         gbc.gridx = 0; gbc.gridy = 1;
         panel.add(timeLabel, gbc);
 
