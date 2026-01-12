@@ -12,5 +12,5 @@ If you're using the IntelliJ IDEA IDE, you can directly open the project folder.
 
 ## Contact Me
 
-Email: ljzfn123@163.com](mailto:ljzfn123@163.com)
+Email: ljzfn123@163.com
 
